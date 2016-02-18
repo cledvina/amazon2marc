@@ -4,7 +4,7 @@
 
 Installation Notes:
 
-1> All five parts (two .pl Perl scripts and three .pm Perl modules) must be 
+1> All six parts (two .pl Perl scripts, three .pm Perl modules, and one .ini file) must be 
    installed in the same directory.
 
 2> In order for this program to work you must have an Amazon Web Services Account.
@@ -16,11 +16,11 @@ Installation Notes:
 
     accesskey: AWS access key
     secretkey: AWS secret key
-    associate: You Amazon Associates tag 
+    associate: Your Amazon Associates tag 
     tmp: Temp directory for saving batches
     analytics: Google Analytics key [optional]
 
-4> Other Perl Modules that need to be installed are:
+4> Other required Perl modules:
     
     LWP::Simple;
     Digest::SHA;
