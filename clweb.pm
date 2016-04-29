@@ -26,7 +26,11 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html .
 #
 # Charles Ledvina
-# cledvina@chopac.org
+# 5 Whaler Court
+# Third Lake, IL 60030-2620
+# USA
+# http://www.libcat.org
+# blp1569@gmail.com
 
 sub qstring {
 	my $in = shift;
@@ -42,7 +46,7 @@ sub qstring {
 	return %out;
 	}
 sub content {
-	print "Content-type: text/html\n\n";
+	print "Content-Type: text/html\n\n";
 	}
 sub cookie {
         my @c = split /; /, $ENV{HTTP_COOKIE};

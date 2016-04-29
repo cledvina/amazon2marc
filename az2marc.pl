@@ -23,8 +23,11 @@
 # <http://www.gnu.org/licenses/>.
 #
 # Charles Ledvina
+# 5 Whaler Court
+# Third Lake, IL 60030-2620
 # USA
-# cledvina@chopac.org
+# http://www.libcat.org
+# blp1569@gmail.com
 
 # binmode STDOUT, ":utf8";
 
@@ -479,7 +482,10 @@ sub parse {
 	else { $q{RDA} = 0 }
 	print " | <input type='checkbox' class='sb' value='rda' onClick='rdaForm()'$rdachk> RDA Format";
 	if ($q{IAM} eq "chopac") {
-		print "<form action='http://chopac.org/cgi-bin/staff/makemarc.pl' method='post' name='xform'>";
+		&cookie;
+		my $base = $COOKS{ref};
+		$base =~ s/(.+)\/.+/$1/;
+		print "<form action='$base/makemarc.pl' method='post' name='xform'>";
 		print "<input type='hidden' name='action' value='send'>";
 	}
 	else {
@@ -504,9 +510,9 @@ sub parse {
 	print "</ul><input type='hidden' name='ref' value='$ENV{HTTP_REFERER}'>";
 	print "<tr class='lowcontrol'><td><input class='button' type='submit' name='save' value='$svalue'>";
 	if ($q{IAM} ne "chopac") {
-	print " <i>as</i> <select name='ext' size='1'><option value='lfts'>.lfts</option><option value='mrc'>.mrc</option><option value='marc'>.marc</option><option value='bin'>.bin</option><option value='txt'>.txt</option></select>";
-	print "<input class='button' type='submit' name='batch' value='Save to Batch'>";
-	print "<input class='button' type='submit' name='empty' value='Empty Batch File'>" if $bai;
+		print " <i>as</i> <select name='ext' size='1'><option value='lfts'>.lfts</option><option value='mrc'>.mrc</option><option value='marc'>.marc</option><option value='bin'>.bin</option><option value='txt'>.txt</option></select>";
+		print "<input class='button' type='submit' name='batch' value='Save to Batch'>";
+		print "<input class='button' type='submit' name='empty' value='Empty Batch File'>" if $bai;
 	}
 	print "<input class='button' type='button' name='fl' value='Worldcat' onClick='location.href=\"http://www.worldcat.org/search/$world\"'>" if $world;
 	print "<input class='button' type='button' name='class' value='Classify' onClick='getClass(\"$world\")' title='Suggests call numbers and LCSH'>" if $world;

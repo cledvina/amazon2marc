@@ -23,7 +23,11 @@
 # <http://www.gnu.org/licenses/>.
 #
 # Charles Ledvina
-# cledvina@chopac.org
+# 5 Whaler Court
+# Third Lake, IL 60030-2620
+# USA
+# http://www.libcat.org
+# blp1569@gmail.com
 
 open INIFILE, 'az2marc.ini';
 while (<INIFILE>) {
@@ -41,7 +45,12 @@ $qs = $ENV{QUERY_STRING} || <STDIN>;
 %q = qstring($qs);
 $q{CT} ||= 'com';
 
-&content;
+&cookie;
+if ($q{IAM} eq 'chopac' and $COOKS{iam} ne 'chopac') {
+	print "Set-Cookie: iam=chopac;\n";
+        print "Set-Cookie: ref=$ENV{HTTP_REFERER}\n";
+        }
+print "Content-Type: text/html\n\n";
 
 ############################################ Scripts and CSS ##############################################################################
 print <<"__END__SCRIPT__";
@@ -81,11 +90,11 @@ print <<"__END__SCRIPT__";
 		hR = new ActiveXObject("Msxml2.XMLHTTP");
 	}
 
-	function cook() {
-		if (document.cookie == "") {
-			document.cookie = "$ctime-$$"
-		}
-	}
+	// function cook() {
+		//if (document.cookie == "") {
+			//document.cookie = "$ctime-$$"
+		//}
+	//}
 	function viewButton() {
 		if (document.sform.isbn.value.match(/[a-wyz]/i)) {
 			document.getElementById("default").value = "Books";
@@ -124,10 +133,10 @@ print <<"__END__SCRIPT__";
 
 	}
 	function vw(asin) {
-		location.href = 'az2marc.pl?ct=$q{CT}&rda=$q{RDA}&kw=' + asin
+		location.href = 'az2marc.pl?iam=$q{IAM}&ct=$q{CT}&rda=$q{RDA}&kw=' + asin
 	}
 	function ex(asin) {
-		location.href = 'az2marc.pl?ct=$q{CT}&rda=$q{RDA}&kw=' + asin + '&qx=1'
+		location.href = 'az2marc.pl?iam=$q{IAM}&ct=$q{CT}&rda=$q{RDA}&kw=' + asin + '&qx=1'
 	}
 	function buy(asin) {
 		location.href = 'http://www.amazon.$q{CT}/exec/obidos/ASIN/' + asin
@@ -168,6 +177,7 @@ sub sform {
 	print "<option value='de' $CSL{de}>Germany";
 	print "<option value='co.uk' $CSL{'co.uk'}>United Kingdom";
 	print "</select>";
+	print "<input type='hidden' value='$q{IAM}' name='iam'>";
 	print "<div class='til' id='tlist'></div>";
 	print "</table></form></center>"
 }
