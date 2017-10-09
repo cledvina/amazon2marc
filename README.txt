@@ -1,4 +1,4 @@
-                       Amazon to Marc Converter
+                       Amazon to Marc Converter X
                              Version 0.1.2
                               2011-03-03
 
